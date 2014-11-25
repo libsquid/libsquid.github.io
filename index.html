@@ -27,7 +27,17 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <p>This is the web site for the <strong>Spherical-Cube Quad-Tree Unique ID Library</strong> (<strong>LibSQUID</strong>).  The purpose of this library is to provide a set of tools for indexing/dividing a set of data on a spherical coordinate system (i.e. geospatial metadata) using a quad-tree indexing scheme applied to a quad-cube cartographic projection.  Four projections are supported: Tangental (TSC), COBE (CSC), Quadrilateralized (QSC), and HEALpix (HSC).</p>
+        <p>This is the web site for the <strong>Spherical-Cube Quad-Tree Unique ID Library</strong> (<strong>LibSQUID</strong>).  The purpose of this library is to provide a set of tools for indexing/dividing a set of data on a spherical coordinate system (i.e. geospatial metadata) using a quad-tree indexing scheme applied to a quad-cube cartographic projection.</p>
+
+<hr>
+
+<p>The LibSQUID library consists of a set of functions written in C which allow a user to index a sphere at a specified resolution using a quad-tree indexing scheme. The indexes themselves are called SQUIDs, short for Spherical-cube Quad-tree Unique ID.  Each SQUID index directly corresponds to a point on the sphere given by a (longitude,latitude) coordinate. In addition, the SQUID defines a region on the sphere, which I call a “tile”, that has well defined boundaries. A SQUID tile is the equivalent to a pixel on an image, except that in this case, the image is the entire sphere.</p>
+
+<p>The spherical coordinate and boundary of a particular SQUID depends on the map projection for which the SQUID is defined. As the name suggests, SQUIDs are defined in terms of “spherical-cube” map projections in which the sphere is divided into six square faces. These faces are then divided according to a quad-tree indexing scheme down to a resolution level, k, defined by the user. At each resolution level, the sphere is divided into 6∗(2^2k) pixels. The 6 spherical-cube faces correspond to the base resolution, k=0. Each pixel corresponds to a SQUID index/tile.  These indices are unique, regardless of the resolution level chosen by the user.</p>
+
+<p>Finally, the SQUID tiles themselves can be further subdivided into pixels producing an image.  The SQUID images can then be used to efficiently store and retrieve spherical imagery. Because SQUID tiles have a well defined geometry, the user can immediately convert a pixel coordinate (x,y) on the SQUID tile image to a coordinate (longitude, latitude) on the sphere. Additionally, SQUID tile images created for the same SQUID index (i.e. a time-series of images, or different spectral channels) may be combined into an image cube for even more efficient storage and recall.</p>
+
+<p>The primary motivation for the LibSQUID system is the archival of high frame rate spherical data, in particular wide-field astronomical time-series imagery. The goal is to archive these data efficiently by re-projecting them onto a standardized 2-D projection, preferably equal-area, indexed in a quad-tree manner, and combined into image cubes for fast retrieval of imagery located closely in time and space.  Currently four quad-cube projections are supported: Tangental (TSC), COBE (CSC), Quadrilateralized (QSC), and HEALPix (HSC).</p>
       </section>
     </div>
 
